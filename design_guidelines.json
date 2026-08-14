@@ -1,0 +1,128 @@
+{
+  "project_name": "KEP PhysicsVerse™",
+  "theme": "Light mode dominant (bright, clean educational look) with high contrast.",
+  "typography": {
+    "headings": {
+      "font_family": "'Outfit', sans-serif",
+      "weights": ["font-medium", "font-bold", "font-extrabold"],
+      "tracking": "tracking-tight",
+      "usage": "Use for H1-H4. Max size text-6xl on desktop. NEVER use Inter."
+    },
+    "body": {
+      "font_family": "'IBM Plex Sans', sans-serif",
+      "weights": ["font-normal", "font-medium"],
+      "tracking": "tracking-normal",
+      "leading": "leading-relaxed",
+      "usage": "Standard UI text, descriptions, analytics."
+    },
+    "data_and_math": {
+      "font_family": "'Source Code Pro', monospace",
+      "usage": "Graphs axes, AI Tutor equations, live slider values."
+    }
+  },
+  "colors": {
+    "archetype": "VIBRANT PLAY + SWISS & HIGH-CONTRAST",
+    "palette": {
+      "background": "#FAFAFA",
+      "surface": "#FFFFFF",
+      "primary": "#2563EB",
+      "secondary": "#10B981",
+      "accent": "#F59E0B",
+      "text_primary": "#111827",
+      "text_secondary": "#4B5563",
+      "border": "#E5E7EB",
+      "graph_lines": ["#2563EB", "#10B981", "#F59E0B", "#8B5CF6"]
+    },
+    "rules": [
+      "No pure black (#000000) or gray without tint. Neutral grays must have a slight blue tint.",
+      "Primary color ONLY for CTAs, active sliders, and primary interaction points.",
+      "Hover states must be a lighter hue of the active state. Explicitly set text color on hover."
+    ]
+  },
+  "visual_enhancers": {
+    "surfaces": "Crisp solid cards with 'border-black/5' or 'border-border'. Avoid heavy glassmorphism for data clarity. Use Neumorphic principles lightly for toggles.",
+    "shadows": "Soft ambient shadows for cards: shadow-sm or shadow-[0_4px_20px_rgba(0,0,0,0.04)]. For active dragged elements: shadow-lg.",
+    "borders": "1px solid crisp borders everywhere to separate content cleanly. Radius: rounded-xl for main containers, rounded-md for inner elements."
+  },
+  "layouts": {
+    "global": "Role-based progressive disclosure dashboard. Left sidebar navigation, top header with user context.",
+    "spacing": "Generous. Use p-6, p-8, and p-12 for container padding. Internal card padding p-6 minimum.",
+    "virtual_lab": "Split pane layout. Left: Canvas (col-span-1 lg:col-span-8). Right: Controls/Sliders (col-span-1 lg:col-span-4).",
+    "dashboard_grid": "High Density Grid. Base: grid-cols-1 md:grid-cols-3 lg:grid-cols-4. Tight gap: gap-6."
+  },
+  "components": [
+    {
+      "name": "Sliders",
+      "instructions": "Use Shadcn Slider, heavily customized for 'Vibrant Play' with thick primary colored tracks and large easy-to-grab thumbs."
+    },
+    {
+      "name": "Cards",
+      "instructions": "Go cardless or use strictly rectangular, flat backgrounds with 1px borders and subtle shadow."
+    },
+    {
+      "name": "Buttons",
+      "instructions": "Pill-shaped or rounded-md. Include hover transforms (-translate-y-[1px]) and clear focus rings."
+    },
+    {
+      "name": "Interactive Canvas",
+      "instructions": "Must have a 'blueprint' or 'grid paper' background pattern (using CSS background size/image) to reinforce the physics/engineering feel."
+    }
+  ],
+  "motion": {
+    "rules": [
+      "Real-time feedback is critical: Sliders must instantly update the canvas and graph without lag.",
+      "Micro-animations on hover (buttons, list items).",
+      "Staggered entrance animations for dashboard cards (framer-motion)."
+    ]
+  },
+  "accessibility": {
+    "rules": [
+      "All interactive elements MUST have data-testid attributes (e.g., data-testid='sim-play-button').",
+      "Ensure minimum 4.5:1 contrast ratio for all text.",
+      "Focus states must have a high contrast 2px ring."
+    ]
+  },
+  "media": {
+    "icons": "lucide-react (crisp, simple, well-supported). Use consistent stroke width.",
+    "illustrations": "SVG graphics for physics concepts. Use clean vector art."
+  },
+  "3d_libraries": {
+    "recommendation": "Use framer-motion and standard HTML5 Canvas/SVG for 2D Mechanics MVP (pendulums, springs, projectiles) to ensure absolute 60fps real-time sync with sliders.",
+    "charts": "Recharts for Graph Studio (Position/Velocity/Acceleration vs Time).",
+    "math": "MathJax or react-katex for AI Tutor equations and LaTeX rendering."
+  },
+  "image_urls": {
+    "virtual_lab_empty_state": {
+      "url": "https://images.unsplash.com/photo-1745571479662-54a2ad1c747f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwzfHxwaHlzaWNzJTIwc3R1ZGVudCUyMHN0dWR5aW5nfGVufDB8fHx8MTc4NjY0MTQ4MHww&ixlib=rb-4.1.0&q=85",
+      "description": "Student working on a circuit board. Use for 'Virtual Lab' onboarding or empty states."
+    },
+    "notes_and_study": {
+      "url": "https://images.unsplash.com/photo-1514369118554-e20d93546b30?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwxfHxwaHlzaWNzJTIwc3R1ZGVudCUyMHN0dWR5aW5nfGVufDB8fHx8MTc4NjY0MTQ4MHww&ixlib=rb-4.1.0&q=85",
+      "description": "Student writing in book. Use for 'Notes' or 'Teacher Studio' sections."
+    },
+    "physics_universe_hero": {
+      "url": "https://images.unsplash.com/photo-1622737133809-d95047b9e673?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MDV8MHwxfHNlYXJjaHwzfHxhYnN0cmFjdCUyMDNkJTIwcGh5c2ljcyUyMHNpbXVsYXRpb24lMjBtZWNoYW5pY3N8ZW58MHx8fHwxNzg2NjQxNDgwfDA&ixlib=rb-4.1.0&q=85",
+      "description": "Floating cubes and glowing spheres. Use for 'Physics Universe' topic explorer background or hero."
+    },
+    "mechanics_module_cover": {
+      "url": "https://images.unsplash.com/photo-1622547748225-3fc4abd2cca0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MDV8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMDNkJTIwcGh5c2ljcyUyMHNpbXVsYXRpb24lMjBtZWNoYW5pY3N8ZW58MHx8fHwxNzg2NjQxNDgwfDA&ixlib=rb-4.1.0&q=85",
+      "description": "Blue and white round abstract illustration. Use for Mechanics topic card."
+    }
+  },
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. Make creative, distinctive frontends that surprise and delight.",
+    "File Extensions: Use .js or .jsx for all React components. Do not use .tsx as per environment rules.",
+    "DO NOT use Inter, Roboto, or Open Sans for headings. Use Outfit or Cabinet Grotesk.",
+    "Avoid generic centered layouts. Use grid/bento layouts with asymmetric spans.",
+    "Use 2-3x more spacing than feels comfortable (e.g., p-8, p-12).",
+    "DO NOT apply universal transition (transition: all). Add transitions for specific interactive elements only.",
+    "DO NOT center align the app container (.App { text-align: center; }).",
+    "Never use AI assistant Emoji characters (🤖🧠💭💡🔮🎯) for icons.",
+    "Use sonner for toasts.",
+    "Use lucide-react for icons.",
+    "Use recharts for plotting real-time physics data.",
+    "Ensure the physics simulation canvas acts in real-time with sliders (controlled via state).",
+    "All interactive elements MUST have a data-testid attribute.",
+    "DO NOT use complete transparent backgrounds in header/overlays. Always have a solid or highly opaque blurred background."
+  ]
+}
