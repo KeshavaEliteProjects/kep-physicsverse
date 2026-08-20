@@ -1,8 +1,15 @@
 import baseConfigs from "./configs";
 import simsMech from "./simsMech";
+import simsKinematics from "./simsKinematics";
+import simsLaws from "./simsLaws"; 
 import simsEM from "./simsEM";
 import simsOTW from "./simsOTW";
 import simsC from "./simsC";
+import simsMomentum from "./simsMomentum"; 
+import simsElectrostatics from "./simsElectrostatics";   
+import simsCapacitors from "./simsCapacitors";       
+import simsCurrent from "./simsCurrent";             
+import simsCircuits from "./simsCircuits";           
 
 // metadata for the original mechanics sims (which don't carry topic/difficulty fields)
 const BASE_META = {
@@ -19,7 +26,7 @@ const BASE_META = {
   verticalloop: { topic: "mechanics", difficulty: "Advanced", summary: "Critical speed to complete a vertical loop." },
 };
 
-const allConfigs = { ...baseConfigs, ...simsMech, ...simsEM, ...simsOTW, ...simsC };
+const allConfigs = { ...baseConfigs, ...simsMech, ...simsKinematics, ...simsLaws, ...simsMomentum, ...simsElectrostatics, ...simsCapacitors, ...simsCurrent, ...simsCircuits, ...simsEM, ...simsOTW, ...simsC };
 
 export const SIM_INDEX = Object.entries(allConfigs).map(([id, c]) => ({
   id,
