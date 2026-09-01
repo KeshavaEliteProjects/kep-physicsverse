@@ -114,7 +114,7 @@ const ohms = {
 };
 
 const seriesparallel = {
-  title: "Series & Parallel Resistors", topic: "electricity", difficulty: "Intermediate",
+  title: "Series & Parallel Circuits", topic: "electricity", difficulty: "Intermediate",
   summary: "Toggle between series and parallel and see how the equivalent resistance changes.",
   equation: "R_s = R_1+R_2, \\quad \\tfrac{1}{R_p}=\\tfrac{1}{R_1}+\\tfrac{1}{R_2}",
   params: [
@@ -172,7 +172,200 @@ const rc = {
     { label: "Current", value: r2((p.voltage - s.vc) / p.R), unit: "mA" }, { label: "% charged", value: r2(100 * s.vc / p.voltage), unit: "%" }]; },
 };
 
-/* ---------------- MAGNETISM ---------------- */
+const kirchhoff = {
+  title: "Kirchhoff's Laws Lab", topic: "electricity", difficulty: "Intermediate",
+  summary: "Simulate a two-loop circuit and verify Kirchhoff's Junction and Loop rules.",
+  equation: "\\sum I_{\\text{in}} = \\sum I_{\\text{out}} \\qquad \\sum V_{\\text{loop}} = 0",
+  params: [
+    { key: "v1", label: "Voltage V1", min: 5, max: 20, step: 1, default: 12, unit: "V" },
+    { key: "v2", label: "Voltage V2", min: 5, max: 20, step: 1, default: 6, unit: "V" },
+    { key: "r1", label: "Resistor R1", min: 2, max: 10, step: 1, default: 4, unit: "Ω" },
+    { key: "r2", label: "Resistor R2", min: 2, max: 10, step: 1, default: 6, unit: "Ω" },
+    { key: "r3", label: "Resistor R3", min: 2, max: 10, step: 1, default: 8, unit: "Ω" },
+  ],
+  init: () => ({ t: 0 }),
+  step: (s, dt) => { s.t += dt; },
+  draw: (ctx, s, p, W, H) => {
+    const cx = W / 2, cy = H / 2;
+    ctx.strokeStyle = "#334155"; ctx.lineWidth = 3;
+    
+    // Draw wire frames
+    ctx.strokeRect(cx - 150, cy - 70, 150, 140);
+    ctx.strokeRect(cx, cy - 70, 150, 140);
+    
+    // Draw left battery V1
+    ctx.fillStyle = "#fff"; ctx.fillRect(cx - 154, cy - 15, 8, 30);
+    ctx.strokeStyle = "#334155"; ctx.strokeRect(cx - 154, cy - 15, 8, 30);
+    ctx.fillStyle = "#1e293b"; ctx.font = "bold 10px sans-serif";
+    ctx.fillText("V1 = " + p.v1 + "V", cx - 146, cy + 4);
+    
+    // Draw right battery V2
+    ctx.fillStyle = "#fff"; ctx.fillRect(cx + 146, cy - 15, 8, 30);
+    ctx.strokeStyle = "#334155"; ctx.strokeRect(cx + 146, cy - 15, 8, 30);
+    ctx.fillText("V2 = " + p.v2 + "V", cx + 105, cy + 4);
+    
+    const rbox = (x, y, label) => {
+      ctx.fillStyle = "#ffe4e6"; ctx.fillRect(x - 20, y - 8, 40, 16);
+      ctx.strokeStyle = "#e11d48"; ctx.strokeRect(x - 20, y - 8, 40, 16);
+      ctx.fillStyle = "#be123c"; ctx.font = "600 10px sans-serif"; ctx.textAlign = "center";
+      ctx.fillText(label, x, y + 4); ctx.textAlign = "left";
+    };
+    rbox(cx - 75, cy - 70, p.r1 + "Ω");
+    rbox(cx + 75, cy - 70, p.r2 + "Ω");
+    rbox(cx, cy, p.r3 + "Ω");
+    
+    // Draw Junction A
+    circle(ctx, cx, cy - 70, 5, "#ef4444");
+    ctx.fillStyle = "#ef4444"; ctx.font = "bold 11px sans-serif";
+    ctx.fillText("A", cx - 4, cy - 78);
+  },
+  graphPoint: (s, p) => {
+    const denom = p.r1 * p.r2 + p.r1 * p.r3 + p.r2 * p.r3;
+    const i1 = (p.v1 * (p.r2 + p.r3) - p.v2 * p.r3) / denom;
+    return { t: r2(s.t), i1: r2(i1) };
+  },
+  xKey: "t", xLabel: "Time (s)",
+  series: [{ key: "i1", label: "Current I1 (A)", color: "#2563eb" }],
+  stats: (s, p) => {
+    const denom = p.r1 * p.r2 + p.r1 * p.r3 + p.r2 * p.r3;
+    const i1 = (p.v1 * (p.r2 + p.r3) - p.v2 * p.r3) / denom;
+    const i2 = (p.v2 * (p.r1 + p.r3) - p.v1 * p.r3) / denom;
+    const i3 = i1 + i2;
+    return [
+      { label: "Current I1", value: r2(i1), unit: "A" },
+      { label: "Current I2", value: r2(i2), unit: "A" },
+      { label: "Current I3 (Middle)", value: r2(i3), unit: "A" },
+      { label: "Junction A check", value: r2(i1) + " + " + r2(i2) + " = " + r2(i3), unit: "" }
+    ];
+  }
+};
+
+const capacitorcharging = {
+  title: "Capacitor Charging Lab", topic: "electricity", difficulty: "Intermediate",
+  summary: "Simulate a capacitor charging through a resistor and observe positive/negative charge build-up on the plates.",
+  equation: "q(t) = C V_0 (1 - e^{-t/RC})",
+  params: [
+    { key: "voltage", label: "Source Voltage", min: 5, max: 20, step: 1, default: 10, unit: "V" },
+    { key: "R", label: "Resistor (R)", min: 1, max: 10, step: 0.5, default: 5, unit: "kΩ" },
+    { key: "C", label: "Capacitor (C)", min: 100, max: 1000, step: 50, default: 500, unit: "μF" },
+  ],
+  init: () => ({ t: 0, vc: 0, running: true }),
+  step: (s, dt, p) => {
+    if (!s.running) return;
+    const tau = p.R * p.C / 1000;
+    s.vc += ((p.voltage - s.vc) / tau) * dt;
+    s.t += dt;
+    if (s.vc >= p.voltage * 0.99) {
+      s.vc = p.voltage;
+      s.running = false;
+    }
+  },
+  done: (s) => !s.running,
+  draw: (ctx, s, p, W, H) => {
+    const cx = W / 2, cy = H / 2;
+    const frac = s.vc / p.voltage;
+    
+    // Draw wire frame
+    ctx.strokeStyle = "#334155"; ctx.lineWidth = 3;
+    ctx.strokeRect(cx - 150, cy - 60, 300, 120);
+    
+    // Draw Resistor Box
+    ctx.fillStyle = "#ffedd5"; ctx.fillRect(cx - 30, cy - 68, 60, 16);
+    ctx.strokeStyle = "#f97316"; ctx.strokeRect(cx - 30, cy - 68, 60, 16);
+    ctx.fillStyle = "#ea580c"; ctx.font = "bold 10px sans-serif"; ctx.textAlign = "center";
+    ctx.fillText(p.R + " kΩ", cx, cy - 56);
+    
+    // Draw Capacitor Parallel Plates
+    ctx.fillStyle = "#fff"; ctx.fillRect(cx - 10, cy + 30, 20, 60);
+    ctx.fillStyle = "#94a3b8"; ctx.fillRect(cx - 6, cy + 30, 4, 60);
+    ctx.fillStyle = "#94a3b8"; ctx.fillRect(cx + 2, cy + 30, 4, 60);
+    
+    // Draw electric charges
+    ctx.fillStyle = "#ef4444"; ctx.font = "bold 10px sans-serif";
+    const numCharges = Math.floor(frac * 6);
+    for (let i = 0; i < numCharges; i++) {
+      ctx.fillText("+", cx - 18, cy + 38 + i * 9);
+      ctx.fillStyle = "#2563eb";
+      ctx.fillText("-", cx + 12, cy + 38 + i * 9);
+      ctx.fillStyle = "#ef4444";
+    }
+    ctx.textAlign = "left";
+  },
+  graphPoint: (s, p) => ({ t: r2(s.t), q: r2(p.C * s.vc) }),
+  xKey: "t", xLabel: "Time (s)",
+  series: [{ key: "q", label: "Charge q (μC)", color: "#3b82f6" }],
+  stats: (s, p) => {
+    const tau = p.R * p.C / 1000;
+    return [
+      { label: "Time Constant τ", value: r2(tau), unit: "s" },
+      { label: "Voltage Vc", value: r2(s.vc), unit: "V" },
+      { label: "Stored Charge (q)", value: r2(p.C * s.vc), unit: "μC" },
+      { label: "Charge Percentage", value: r2(100 * s.vc / p.voltage), unit: "%" }
+    ];
+  }
+};
+
+const rccircuit = {
+  title: "RC Circuit Dynamics", topic: "electricity", difficulty: "Advanced",
+  summary: "Select charging or discharging mode to observe the transient responses of an RC circuit.",
+  equation: "V_C(t) = V_0(1 - e^{-t/RC}) \\quad \\text{or} \\quad V_0 e^{-t/RC}",
+  params: [
+    { key: "mode", label: "Circuit Mode", type: "select", options: ["Charging", "Discharging"], default: "Charging" },
+    { key: "voltage", label: "Source V0", min: 5, max: 20, step: 1, default: 10, unit: "V" },
+    { key: "R", label: "Resistor (R)", min: 1, max: 10, step: 0.5, default: 4, unit: "kΩ" },
+    { key: "C", label: "Capacitor (C)", min: 100, max: 1000, step: 50, default: 500, unit: "μF" },
+  ],
+  init: (p) => ({ t: 0, vc: p.mode === "Charging" ? 0 : p.voltage, running: true }),
+  step: (s, dt, p) => {
+    if (!s.running) return;
+    const tau = p.R * p.C / 1000;
+    s.t += dt;
+    if (p.mode === "Charging") {
+      s.vc += ((p.voltage - s.vc) / tau) * dt;
+      if (s.vc >= p.voltage * 0.99) { s.vc = p.voltage; s.running = false; }
+    } else {
+      s.vc -= (s.vc / tau) * dt;
+      if (s.vc <= p.voltage * 0.01) { s.vc = 0; s.running = false; }
+    }
+  },
+  done: (s) => !s.running,
+  draw: (ctx, s, p, W, H) => {
+    const cx = W / 2, cy = H / 2;
+    ctx.strokeStyle = "#334155"; ctx.lineWidth = 3;
+    ctx.strokeRect(cx - 150, cy - 60, 300, 120);
+    
+    // Battery
+    ctx.fillStyle = "#334155"; ctx.fillRect(cx - 154, cy - 14, 8, 28);
+    
+    // Capacitor plates
+    ctx.fillStyle = "#fff"; ctx.fillRect(cx + 110, cy + 30, 20, 60);
+    ctx.fillStyle = "#94a3b8"; ctx.fillRect(cx + 112, cy + 30, 4, 60);
+    ctx.fillStyle = "#94a3b8"; ctx.fillRect(cx + 124, cy + 30, 4, 60);
+    
+    // Resistor
+    ctx.fillStyle = "#ffedd5"; ctx.fillRect(cx - 30, cy - 68, 60, 16);
+    ctx.strokeStyle = "#f97316"; ctx.strokeRect(cx - 30, cy - 68, 60, 16);
+    ctx.fillStyle = "#ea580c"; ctx.font = "bold 10px sans-serif"; ctx.textAlign = "center";
+    ctx.fillText(p.R + " kΩ", cx, cy - 56);
+    ctx.textAlign = "left";
+    
+    // Display current state
+    ctx.fillStyle = "#1e293b"; ctx.font = "bold 13px sans-serif";
+    ctx.fillText("Vc = " + r2(s.vc) + " V", cx - 40, cy + 10);
+  },
+  graphPoint: (s) => ({ t: r2(s.t), vc: r2(s.vc) }),
+  xKey: "t", xLabel: "Time (s)",
+  series: [{ key: "vc", label: "Capacitor Voltage Vc (V)", color: "#ea580c" }],
+  stats: (s, p) => {
+    const tau = p.R * p.C / 1000;
+    return [
+      { label: "Time Constant τ", value: r2(tau), unit: "s" },
+      { label: "Capacitor Voltage", value: r2(s.vc), unit: "V" },
+      { label: "Current (mA)", value: r2(Math.abs(p.voltage - s.vc) / p.R), unit: "mA" }
+    ];
+  }
+};
+
 const barmagnet = {
   title: "Bar Magnet Field", topic: "magnetism", difficulty: "Beginner",
   summary: "Explore a bar magnet's dipole field and watch a compass align with the local field.",
@@ -325,5 +518,5 @@ const generator = {
     { label: "Field", value: p.B, unit: "T" }, { label: "Output", value: "AC sine", unit: "" }],
 };
 
-const simsEM = { charges, capacitor, ohms, seriesparallel, rc, barmagnet, chargeinB, wireB, induction, generator };
+const simsEM = { charges, capacitor, ohms, seriesparallel, rc, kirchhoff, capacitorcharging, rccircuit, barmagnet, chargeinB, wireB, induction, generator };
 export default simsEM;

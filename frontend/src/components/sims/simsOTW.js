@@ -98,30 +98,6 @@ const prism = {
     { label: "Index", value: p.n, unit: "" }, { label: "Colours", value: "red→violet", unit: "" }],
 };
 
-const doubleslit = {
-  title: "Double-Slit Interference", topic: "optics", difficulty: "Advanced",
-  summary: "Young's experiment — vary slit spacing and wavelength to change the fringe pattern.",
-  equation: "\\beta = \\frac{\\lambda D}{d}",
-  params: [
-    { key: "wavelength", label: "Wavelength", min: 400, max: 700, step: 10, default: 550, unit: "nm" },
-    { key: "slit", label: "Slit separation", min: 0.5, max: 4, step: 0.1, default: 1.5, unit: "mm" },
-    { key: "dist", label: "Screen distance", min: 1, max: 4, step: 0.25, default: 2, unit: "m" },
-  ],
-  init: () => ({ t: 0 }),
-  step: (s, dt) => { s.t += dt; },
-  draw: (ctx, s, p, W, H) => {
-    const beta = (p.wavelength * 1e-9 * p.dist) / (p.slit * 1e-3); const bpx = beta * 4000;
-    const col = p.wavelength < 450 ? "#8b5cf6" : p.wavelength < 500 ? "#3b82f6" : p.wavelength < 570 ? "#22c55e" : p.wavelength < 620 ? "#eab308" : "#ef4444";
-    for (let x = 40; x < W - 40; x++) { const I = Math.pow(Math.cos((Math.PI * (x - W / 2)) / bpx), 2); ctx.fillStyle = col; ctx.globalAlpha = I; ctx.fillRect(x, H / 2 - 70, 1, 140); }
-    ctx.globalAlpha = 1;
-  },
-  graphPoint: (s, p) => ({ t: r2(s.t), beta: r2((p.wavelength * 1e-9 * p.dist) / (p.slit * 1e-3) * 1000) }),
-  xKey: "t", xLabel: "Time (s)",
-  series: [{ key: "beta", label: "Fringe width (mm)", color: "#2563eb" }],
-  stats: (s, p) => [
-    { label: "Fringe width β", value: r2((p.wavelength * 1e-9 * p.dist) / (p.slit * 1e-3) * 1000), unit: "mm" },
-    { label: "Wavelength", value: p.wavelength, unit: "nm" }, { label: "Slit spacing", value: p.slit, unit: "mm" }, { label: "Screen D", value: p.dist, unit: "m" }],
-};
 
 /* ---------------- THERMODYNAMICS ---------------- */
 const gasbox = {
@@ -332,5 +308,5 @@ const doppler = {
     { label: "Source speed", value: p.sourceV, unit: "×v" }, { label: "Emitted", value: p.freq, unit: "Hz" }],
 };
 
-const simsOTW = { refraction, lens, prism, doubleslit, gasbox, pvdiagram, heatconduction, carnot, wavestring, standingwave, beats, doppler };
+const simsOTW = { refraction, lens, prism, gasbox, pvdiagram, heatconduction, carnot, wavestring, standingwave, beats, doppler };
 export default simsOTW;
