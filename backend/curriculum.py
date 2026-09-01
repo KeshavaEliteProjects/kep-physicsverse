@@ -19,27 +19,51 @@ CURRICULUM = {
             ["Physical quantities", "vectors"], ["SI units", "vectors"], ["Dimensions", "vectors"], ["Dimensional analysis", "vectors"],
             ["Scalars and vectors", "vectors"], ["Vector addition", "vectors"], ["Vector resolution", "vectors"]]},
         {"title": "Kinematics", "concepts": [
-            ["Position and displacement", "kinematics1d"], ["Distance", "kinematics1d"], ["Speed and velocity", "kinematics1d"],
-            ["Acceleration", "kinematics1d"], ["Uniform motion", "kinematics1d"], ["Uniformly accelerated motion", "kinematics1d"],
-            ["Motion graphs", "kinematics1d"], ["Relative motion", "relativemotion"], ["Free fall", "projectile"],
-            ["Projectile motion", "projectile"], ["Motion in 2D", "projectile"]]},
-        {"title": "Laws of Motion", "concepts": [
-            ["Newton's First Law", "newton2"], ["Newton's Second Law", "newton2"], ["Newton's Third Law", "newton2"], ["Force", "newton2"],
-            ["Mass", "newton2"], ["Weight", "newton2"], ["Free-body diagrams", "newton2"], ["Normal force", "incline"],
-            ["Tension", "pulley"], ["Friction", "newton2"], ["Inclined plane", "incline"], ["Connected bodies", "pulley"], ["Pulley systems", "pulley"]]},
+            ["Position and displacement", "displacement"],
+            ["Distance", "distancetracker"],
+            ["Speed and velocity", "speedvelocity"],
+            ["Acceleration", "acceleration1d"],
+            ["Uniform motion", "uniformmotion"],
+            ["Uniformly accelerated motion", "kinematics1d"],
+            ["Motion graphs", "motiongraphs"],
+            ["Relative motion", "relativemotion"],
+            ["Free fall", "freefall"],
+            ["Projectile motion", "projectile"],
+            ["Motion in 2D", "motion2d"]]},
+
+            {"title": "Laws of Motion", "concepts": [
+            ["Newton's First Law", "newton1"],
+            ["Newton's Second Law", "newton2"],
+            ["Newton's Third Law", "newton3"],
+            ["Force", "force"],
+            ["Mass", "mass"],
+            ["Weight", "weight"],
+            ["Free-body diagrams", "freebody"],
+            ["Normal force", "normalforce"],
+            ["Tension", "tension"],
+            ["Friction", "friction"],
+            ["Inclined plane", "incline"],
+            ["Connected bodies", "connectedbodies"],
+            ["Pulley systems", "pulley"]]},
         {"title": "Work, Energy & Power", "concepts": [
-            ["Work", "work"], ["Work-energy theorem", "workenergy"], ["Kinetic energy", "kineticenergy"], ["Potential energy", "potentialenergy"],
-            ["Conservation of energy", "conservationofenergy"], ["Power", "power"], ["Conservative forces", "conservativeforces"],
-            ["Spring energy", "springenergy"], ["Energy diagrams", "conservationofenergy"], ["Energy Skate Ramp", "energyramp"]]},
-        {"title": "Momentum & Collisions", "concepts": [
-            ["Linear momentum", "collision"], ["Impulse", "collision"], ["Conservation of momentum", "collision"], ["Elastic collision", "collision"],
-            ["Inelastic collision", "collision"], ["1D collisions", "collision"], ["2D collisions", "momentum2d"], ["Centre of mass", "com"]]},
+            ["Work", "energyramp"], ["Work-energy theorem", "energyramp"], ["Kinetic energy", "energyramp"], ["Potential energy", "energyramp"],
+            ["Conservation of energy", "energyramp"], ["Power", "energyramp"], ["Conservative forces", "energyramp"],
+            ["Spring energy", "spring"], ["Energy diagrams", "energyramp"], ["Energy Skate Ramp", "energyramp"]]},
+       {"title": "Momentum & Collisions", "concepts": [
+            ["Linear momentum", "linearmomentum"],
+            ["Impulse", "impulse"],
+            ["Conservation of momentum", "momentumconservation"],
+            ["Elastic collision", "elasticcollision"],
+            ["Inelastic collision", "inelasticcollision"],
+            ["1D collisions", "collision"],
+            ["2D collisions", "momentum2d"],
+            ["Centre of mass", "com"]]},
         {"title": "Circular Motion", "concepts": [
-            ["Angular displacement", "angulardisplacement"], ["Angular velocity", "angularvelocity"], ["Angular acceleration", "angularacceleration"], ["Centripetal acceleration", "centripetalacceleration"],
-            ["Centripetal force", "centripetalforce"], ["Banked roads", "bankedroads"], ["Banked curve", "bankedcurve"], ["Conical pendulum", "conical"], ["Vertical circular motion", "verticalloop"]]},
+            ["Angular displacement", "rotation"], ["Angular velocity", "rotation"], ["Angular acceleration", "rotation"], ["Centripetal acceleration", "banked"],
+            ["Centripetal force", "banked"], ["Banked roads", "banked"], ["Banked curve", "banked"], ["Conical pendulum", "conical"], ["Vertical circular motion", "verticalloop"]]},
         {"title": "Rotational Motion", "concepts": [
-            ["Torque", "torque"], ["Moment of inertia", "momentofinertia"], ["Radius of gyration", "radiusofgyration"], ["Angular momentum", "angularmomentum"],
-            ["Rotational kinetic energy", "rotationalkineticenergy"], ["Rolling motion", "rollingmotion"], ["Conservation of angular momentum", "conservationofangularmomentum"]]},
+            ["Torque", "rotation"], ["Moment of inertia", "rotation"], ["Radius of gyration", "rotation"], ["Angular momentum", "angmom"],
+            ["Rotational kinetic energy", "rotation"], ["Rolling motion", "rolling"], ["Conservation of angular momentum", "angmom"]]},
         {"title": "Gravitation", "concepts": [
             ["Universal law of gravitation", "orbit"], ["Gravitational field", "orbit"], ["Gravitational potential", "orbit"], ["Escape velocity", "orbit"],
             ["Orbital velocity", "orbit"], ["Satellites", "orbit"], ["Kepler's laws", "kepler"], ["Gravity & Orbits", "orbit"]]},
@@ -49,41 +73,58 @@ CURRICULUM = {
     ],
     "electricity": [
         {"title": "Electrostatics", "concepts": [
-            ["Electric charge", "charges"], ["Coulomb's law", "charges"], ["Electric field", "charges"], ["Electric field lines", "charges"],
-            ["Electric potential", "charges"], ["Potential difference", "charges"], ["Electric dipole", "charges"], ["Gauss's law", "charges"],
-            ["Capacitance", "capacitor"], ["Capacitors", "capacitor"], ["Energy stored in capacitor", "capacitor"]]},
+            ["Electric charge", "charge"],
+            ["Coulomb's law", "charges"],
+            ["Electric field", "electricfield"],
+            ["Electric field lines", "fieldlines"],
+            ["Electric potential", "potential"],
+            ["Potential difference", "potentialdiff"],
+            ["Electric dipole", "dipole"],
+            ["Gauss's law", "gauss"],
+            ["Capacitance", "capacitor"],
+            ["Capacitors", "capacitorcircuit"],
+            ["Energy stored in capacitor", "energycapacitor"]]},
+
         {"title": "Current Electricity", "concepts": [
-            ["Electric current", "ohms"], ["Drift velocity", "ohms"], ["Resistance", "ohms"], ["Resistivity", "ohms"], ["Ohm's law", "ohms"],
-            ["Series circuits", "seriesparallel"], ["Parallel circuits", "seriesparallel"], ["Kirchhoff's laws", "seriesparallel"],
-            ["Wheatstone bridge", "seriesparallel"], ["Meter bridge", "seriesparallel"], ["Electrical power", "ohms"], ["Heating effect", "ohms"]]},
+            ["Electric current", "electriccurrent"],
+            ["Drift velocity", "driftvelocity"],
+            ["Resistance", "resistance"],
+            ["Resistivity", "resistivity"],
+            ["Ohm's law", "ohms"],
+            ["Series circuits", "seriescircuit"],
+            ["Parallel circuits", "parallelcircuit"],
+            ["Kirchhoff's laws", "kirchhoff"],
+            ["Wheatstone bridge", "wheatstonebridge"],
+            ["Meter bridge", "meterbridge"],
+            ["Electrical power", "electricalpower"],
+            ["Heating effect", "heatingeffect"]]},
         {"title": "Circuit Components", "concepts": [
             ["Battery", "ohms"], ["Resistor", "ohms"], ["Switch", "ohms"], ["LED", "ohms"], ["Capacitor", "capacitor"],
             ["Diode", "ohms"], ["Multimeter", "ohms"], ["Ammeter", "ohms"], ["Voltmeter", "ohms"]]},
         {"title": "Interactive Circuit Labs", "concepts": [
-            ["Ohm's Law", "ohms"], ["Series/parallel circuits", "seriesparallel"], ["Kirchhoff circuit", "kirchhoff"],
-            ["Capacitor charging", "capacitorcharging"], ["RC circuit", "rccircuit"]]},
+            ["Ohm's Law", "ohms"], ["Series/parallel circuits", "seriesparallel"], ["Kirchhoff circuit", "seriesparallel"],
+            ["Capacitor charging", "rc"], ["RC circuit", "rc"]]},
     ],
     "magnetism": [
         {"title": "Magnetic Field", "concepts": [
-            ["Magnetic field", "magneticfield"], ["Magnetic field lines", "magneticfieldlines"], ["Earth's magnetic field", "earthsfield"], ["Magnetic force", "magneticforce"]]},
+            ["Magnetic field", "barmagnet"], ["Magnetic field lines", "barmagnet"], ["Earth's magnetic field", "barmagnet"], ["Magnetic force", "chargeinB"]]},
         {"title": "Moving Charges", "concepts": [
-            ["Lorentz force", "lorentzforce"], ["Charged particle in magnetic field", "chargeinB"], ["Velocity selector", "velocityselector"], ["Cyclotron", "cyclotron"]]},
+            ["Lorentz force", "chargeinB"], ["Charged particle in magnetic field", "chargeinB"], ["Velocity selector", "chargeinB"], ["Cyclotron", "chargeinB"]]},
         {"title": "Current & Magnetism", "concepts": [
-            ["Biot-Savart law", "biotsavart"], ["Ampere's law", "ampereslaw"], ["Straight conductor", "straightconductor"], ["Circular loop", "circularloop"], ["Solenoid", "solenoidlab"], ["Toroid", "toroid"]]},
+            ["Biot-Savart law", "wireB"], ["Ampere's law", "wireB"], ["Straight conductor", "wireB"], ["Circular loop", "wireB"], ["Solenoid", "wireB"], ["Toroid", "wireB"]]},
         {"title": "Electromagnetic Induction", "concepts": [
-            ["Faraday's law", "faradayslaw"], ["Lenz's law", "lenzslaw"], ["Magnetic flux", "magneticflux"], ["Motional EMF", "motionalemf"], ["Generator", "acgenerator"], ["Transformer", "transformer"]]},
+            ["Faraday's law", "induction"], ["Lenz's law", "induction"], ["Magnetic flux", "induction"], ["Motional EMF", "induction"], ["Generator", "generator"], ["Transformer", "generator"]]},
         {"title": "Interactive Labs", "concepts": [
-            ["Magnetic field mapping", "barmagnet"], ["Charged particle motion", "chargeinB"], ["Solenoid", "solenoidlab"],
-            ["Electromagnetic induction", "faradayslaw"], ["Generator", "acgenerator"]]},
+            ["Magnetic field mapping", "barmagnet"], ["Charged particle motion", "chargeinB"], ["Solenoid", "wireB"], ["Electromagnetic induction", "induction"], ["Generator", "generator"]]},
     ],
     "optics": [
         {"title": "Ray Optics", "concepts": [
-            ["Reflection", "reflection"], ["Refraction", "refraction"], ["Refractive index", "refractiveindex"], ["Snell's law", "snellslaw"], ["Total internal reflection", "totalinternalreflection"],
-            ["Mirrors", "mirrors"], ["Mirror equation", "mirrorequation"], ["Lenses", "lenses"], ["Lens equation", "lensequation"], ["Magnification", "magnification"], ["Prism", "prism"], ["Optical instruments", "opticalinstruments"]]},
+            ["Reflection", "refraction"], ["Refraction", "refraction"], ["Refractive index", "refraction"], ["Snell's law", "refraction"], ["Total internal reflection", "refraction"],
+            ["Mirrors", "lens"], ["Mirror equation", "lens"], ["Lenses", "lens"], ["Lens equation", "lens"], ["Magnification", "lens"], ["Prism", "prism"], ["Optical instruments", "lens"]]},
         {"title": "Wave Optics", "concepts": [
-            ["Huygens principle", "huygens"], ["Interference", "interference"], ["Young's double-slit experiment", "doubleslit"], ["Diffraction", "diffraction"], ["Polarization", "polarization"]]},
+            ["Huygens principle", "doubleslit"], ["Interference", "doubleslit"], ["Young's double-slit experiment", "doubleslit"], ["Diffraction", "doubleslit"], ["Polarization", "doubleslit"]]},
         {"title": "Interactive Labs", "concepts": [
-            ["Mirror experiment", "mirrorequation"], ["Lens experiment", "lensequation"], ["Prism", "prism"], ["Refraction", "refraction"], ["Total internal reflection", "totalinternalreflection"], ["Double-slit experiment", "doubleslit"]]},
+            ["Mirror experiment", "lens"], ["Lens experiment", "lens"], ["Prism", "prism"], ["Refraction", "refraction"], ["Total internal reflection", "refraction"], ["Double-slit experiment", "doubleslit"]]},
     ],
     "thermodynamics": [
         {"title": "Thermal Physics", "concepts": [
@@ -144,7 +185,7 @@ CURRICULUM = {
     ],
     "astrophysics": [
         {"title": "Solar System", "concepts": [
-            ["Planets", "planets"], ["Orbits", "orbits"], ["Kepler's laws", "kepler"], ["Gravity", "gravity"], ["Seasons", "seasons"], ["Moon phases", "moonphases"]]},
+            ["Planets", "planetsystem"], ["Orbits", "kepler"], ["Kepler's laws", "kepler"], ["Gravity", "orbit"], ["Seasons", "planetsystem"], ["Moon phases", "planetsystem"]]},
         {"title": "Stars", "concepts": [
             ["Star formation", "stars"], ["Stellar evolution", "stars"], ["Nuclear fusion", "stars"], ["Main sequence", "stars"], ["Red giants", "stars"], ["Supernova", "stars"]]},
         {"title": "Extreme Objects", "concepts": [
