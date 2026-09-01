@@ -1,32 +1,107 @@
+```javascript
 import baseConfigs from "./configs";
 import simsMech from "./simsMech";
 import simsKinematics from "./simsKinematics";
-import simsLaws from "./simsLaws"; 
+import simsLaws from "./simsLaws";
 import simsEM from "./simsEM";
 import simsOTW from "./simsOTW";
 import simsC from "./simsC";
-import simsMomentum from "./simsMomentum"; 
-import simsElectrostatics from "./simsElectrostatics";   
-import simsCapacitors from "./simsCapacitors";       
-import simsCurrent from "./simsCurrent";             
-import simsCircuits from "./simsCircuits";           
+import simsMomentum from "./simsMomentum";
+import simsElectrostatics from "./simsElectrostatics";
+import simsCapacitors from "./simsCapacitors";
+import simsCurrent from "./simsCurrent";
+import simsCircuits from "./simsCircuits";
 
-// metadata for the original mechanics sims (which don't carry topic/difficulty fields)
+// New simulations from main
+import simsWEP from "./simsWEP";
+import simsCircular from "./simsCircular";
+import simsRotational from "./simsRotational";
+import simsMagnetism from "./simsMagnetism";
+import simsOptics from "./simsOptics";
+import simsAstrophysics from "./simsAstrophysics";
+
+// metadata for the original mechanics sims
+// (which don't carry topic/difficulty fields)
 const BASE_META = {
-  projectile: { topic: "mechanics", difficulty: "Beginner", summary: "Launch a projectile under gravity, drag and wind." },
-  pendulum: { topic: "mechanics", difficulty: "Beginner", summary: "Oscillations and time period of a simple pendulum." },
-  spring: { topic: "mechanics", difficulty: "Intermediate", summary: "Simple harmonic motion of a mass on a spring." },
-  collision: { topic: "mechanics", difficulty: "Intermediate", summary: "1D collisions and conservation of momentum & energy." },
-  orbit: { topic: "mechanics", difficulty: "Advanced", summary: "Set a satellite's speed to orbit, escape or crash." },
-  incline: { topic: "mechanics", difficulty: "Beginner", summary: "Friction, normal force and acceleration on a ramp." },
-  pulley: { topic: "mechanics", difficulty: "Intermediate", summary: "Atwood machine: acceleration and string tension." },
-  banked: { topic: "mechanics", difficulty: "Advanced", summary: "Safe speed range on a banked circular turn." },
-  energyramp: { topic: "mechanics", difficulty: "Intermediate", summary: "KE ↔ PE energy conservation on a curved track." },
-  conical: { topic: "mechanics", difficulty: "Advanced", summary: "A bob revolving in a horizontal circle." },
-  verticalloop: { topic: "mechanics", difficulty: "Advanced", summary: "Critical speed to complete a vertical loop." },
+  projectile: {
+    topic: "mechanics",
+    difficulty: "Beginner",
+    summary: "Launch a projectile under gravity, drag and wind.",
+  },
+  pendulum: {
+    topic: "mechanics",
+    difficulty: "Beginner",
+    summary: "Oscillations and time period of a simple pendulum.",
+  },
+  spring: {
+    topic: "mechanics",
+    difficulty: "Intermediate",
+    summary: "Simple harmonic motion of a mass on a spring.",
+  },
+  collision: {
+    topic: "mechanics",
+    difficulty: "Intermediate",
+    summary: "1D collisions and conservation of momentum & energy.",
+  },
+  orbit: {
+    topic: "mechanics",
+    difficulty: "Advanced",
+    summary: "Set a satellite's speed to orbit, escape or crash.",
+  },
+  incline: {
+    topic: "mechanics",
+    difficulty: "Beginner",
+    summary: "Friction, normal force and acceleration on a ramp.",
+  },
+  pulley: {
+    topic: "mechanics",
+    difficulty: "Intermediate",
+    summary: "Atwood machine: acceleration and string tension.",
+  },
+  banked: {
+    topic: "mechanics",
+    difficulty: "Advanced",
+    summary: "Safe speed range on a banked circular turn.",
+  },
+  energyramp: {
+    topic: "mechanics",
+    difficulty: "Intermediate",
+    summary: "KE ↔ PE energy conservation on a curved track.",
+  },
+  conical: {
+    topic: "mechanics",
+    difficulty: "Advanced",
+    summary: "A bob revolving in a horizontal circle.",
+  },
+  verticalloop: {
+    topic: "mechanics",
+    difficulty: "Advanced",
+    summary: "Critical speed to complete a vertical loop.",
+  },
 };
 
-const allConfigs = { ...baseConfigs, ...simsMech, ...simsKinematics, ...simsLaws, ...simsMomentum, ...simsElectrostatics, ...simsCapacitors, ...simsCurrent, ...simsCircuits, ...simsEM, ...simsOTW, ...simsC };
+const allConfigs = {
+  ...baseConfigs,
+  ...simsMech,
+  ...simsKinematics,
+  ...simsLaws,
+  ...simsMomentum,
+  ...simsElectrostatics,
+  ...simsCapacitors,
+  ...simsCurrent,
+  ...simsCircuits,
+  ...simsEM,
+  ...simsOTW,
+  ...simsC,
+
+  // New simulations from main
+  ...simsWEP,
+  ...simsCircular,
+  ...simsRotational,
+  ...simsMagnetism,
+  ...simsOptics,
+  ...simsAstrophysics,
+};
 
 export const SIM_INDEX = Object.entries(allConfigs).map(([id, c]) => ({
   id,
@@ -37,7 +112,13 @@ export const SIM_INDEX = Object.entries(allConfigs).map(([id, c]) => ({
   equation: c.equation || "",
 }));
 
-export function getSim(id) { return allConfigs[id]; }
-export function getSimMeta(id) { return SIM_INDEX.find((s) => s.id === id); }
+export function getSim(id) {
+  return allConfigs[id];
+}
+
+export function getSimMeta(id) {
+  return SIM_INDEX.find((s) => s.id === id);
+}
 
 export default allConfigs;
+```
